@@ -19,27 +19,22 @@ configurations {
 repositories { mavenCentral() }
 
 dependencies {
-    // Core Spring
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    // JSON (Java time: LocalDate/LocalDateTime)
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
-    // Dev helpers
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // DBs
-    runtimeOnly 'com.h2database:h2'              // dev
-    runtimeOnly 'org.postgresql:postgresql'      // prod
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
 
-    // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // Tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

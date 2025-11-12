@@ -1,0 +1,17 @@
+[ {
+  "id" : 1,
+  "title" : "Need DB buddy",
+  "description" : "Tu/Th 18-20",
+  "course" : "Database",
+  "major" : "CS",
+  "createdAt" : null,
+  "tags" : [ "table", "db" ],
+  "author" : {
+    "id" : 1,
+    "name" : "Raul",
+    "email" : "raul.gata@yahoo.com",
+    "major" : "Computer Science",
+    "availability" : "Weekdays 18-20",
+    "role" : "STUDENT"
+  }
+} ]
