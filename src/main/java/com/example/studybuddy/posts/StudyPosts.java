@@ -26,9 +26,28 @@ public class StudyPosts {
     private String major;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> tags = new HashSet<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> imageUrls = new HashSet<>();
 
     @ManyToOne(optional = false)
     private User author;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PostType type = PostType.NOTE;
+
+    @Column(length = 10)
+    private String language;
+
+    @PrePersist
+    void prePersist() {
+        if (type == null) type = PostType.NOTE;
+        if (createdAt == null) createdAt = LocalDateTime.now();
+    }
+
 }
+
+

@@ -1,7 +1,11 @@
 package com.example.studybuddy.users;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +16,11 @@ import java.util.Map;
 public class UserController {
 
     private final UserRepository users;
+    private final PasswordEncoder encoder;
 
-    public UserController(UserRepository users) {
+    public UserController(UserRepository users, PasswordEncoder encoder) {
         this.users = users;
+        this.encoder = encoder;
     }
 
     @GetMapping
@@ -29,26 +35,26 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    public record RegisterRequest(
+            @NotBlank @Size(max = 60) String name,
+            @NotBlank @Email String email,
+            @NotBlank @Size(min = 6, max = 100) String password
+    ) {}
+
     @PostMapping
-    public ResponseEntity<User> create(@Valid @RequestBody User u) {
-        return ResponseEntity.ok(users.save(u));
-    }
+    public ResponseEntity<?> create(@Valid @RequestBody RegisterRequest req) {
+        if (users.existsByEmail(req.email())) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Email already in use"));
+        }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id,
-                                           @RequestBody Map<String, Object> updates) {
-        return users.findById(id).map(u -> {
-            if (updates.containsKey("name")) u.setName((String) updates.get("name"));
-            if (updates.containsKey("email")) u.setEmail((String) updates.get("email"));
-            if (updates.containsKey("major")) u.setMajor((String) updates.get("major"));
-            if (updates.containsKey("availability")) u.setAvailability((String) updates.get("availability"));
-            if (updates.containsKey("role")) {
+        User u = User.builder()
+                .name(req.name())
+                .email(req.email())
+                .passwordHash(encoder.encode(req.password()))
+                .role(User.Role.STUDENT)
+                .build();
 
-                String roleStr = String.valueOf(updates.get("role"));
-                u.setRole(User.Role.valueOf(roleStr));
-            }
-            return ResponseEntity.ok(users.save(u));
-        }).orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.status(201).body(users.save(u));
     }
 
     @DeleteMapping("/{id}")

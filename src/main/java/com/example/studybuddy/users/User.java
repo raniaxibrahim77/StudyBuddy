@@ -37,4 +37,5 @@ public class User {
     private Role role = Role.STUDENT;
 
     public enum Role { STUDENT, ADMIN }
+
 }

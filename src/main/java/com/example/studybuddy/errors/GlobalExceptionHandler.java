@@ -37,7 +37,27 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> unknown(Exception ex) {
-        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error: " + ex.getMessage());
+        ex.printStackTrace();
+        String msg = ex.getMessage();
+        if (msg == null || msg.isBlank()) {
+            msg = ex.getClass().getSimpleName();
+        }
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error: " + msg);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<Map<String, Object>> unauthorized(UnauthorizedException ex) {
+        return error(HttpStatus.UNAUTHORIZED, ex.getMessage());
+    }
+
+    @ExceptionHandler(SessionNotFound.class)
+    public ResponseEntity<Map<String, Object>> sessionNotFound(SessionNotFound ex) {
+        return error(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<Map<String, Object>> forbidden(ForbiddenException ex) {
+        return error(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
     private ResponseEntity<Map<String, Object>> error(HttpStatus status, String message) {
@@ -47,4 +67,6 @@ public class GlobalExceptionHandler {
         body.put("message", message);
         return ResponseEntity.status(status).body(body);
     }
+
 }
+
