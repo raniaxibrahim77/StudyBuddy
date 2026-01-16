@@ -1,36 +1,50 @@
-# Getting Started
+kUVTBuddy
 
-### Reference Documentation
+UVTBuddy is a full-stack integration application designed for university students.
+It centralizes essential UVT-related information and academic events, while also helping students connect and collaborate through study posts and study sessions.
 
-For further reference, please consider the following sections:
+The application aims to simplify student life by providing quick access to useful university content and by encouraging peer-to-peer learning and interaction.
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/3.5.7/gradle-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.5.7/gradle-plugin/packaging-oci-image.html)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/3.5.7/reference/data/sql.html#data.sql.jpa-and-spring-data)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.5.7/reference/using/devtools.html)
-* [Spring Security](https://docs.spring.io/spring-boot/3.5.7/reference/web/spring-security.html)
-* [Thymeleaf](https://docs.spring.io/spring-boot/3.5.7/reference/web/servlet.html#web.servlet.spring-mvc.template-engines)
-* [Validation](https://docs.spring.io/spring-boot/3.5.7/reference/io/validation.html)
-* [Spring Web](https://docs.spring.io/spring-boot/3.5.7/reference/web/servlet.html)
+Tech Stack
+- Backend: Java, Spring Boot, Spring Security, Gradle
+- Frontend: Angular
+- Database: MySQL (production), H2 (testing)
 
-### Guides
+Main Features
+- User authentication and role-based authorization
+- UVT-related events and academic information
+- Study posts (questions, advice, notes)
+- Study session creation and participation
+- File uploads for posts
+- RESTful API with CRUD operations
+- Secure backend endpoints using Spring Security
 
-The following guides illustrate how to use some features concretely:
+How to Run the Backend
+1. Make sure Java 17+ is installed
+2. In the project root, run:
+   ./gradlew bootRun
+3. Backend runs at:
+   http://localhost:8080
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
-* [Validation](https://spring.io/guides/gs/validating-form-input/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+How to Run the Frontend
+1. Navigate to the frontend folder:
+   cd frontend
+2. Install dependencies:
+   npm install
+3. Start the Angular application:
+   ng serve --proxy-config proxy.conf.json
+4. Frontend runs at:
+   http://localhost:4200
 
-### Additional Links
+Database
+- MySQL is used for the main application data
+- H2 in-memory database is used only for testing purposes
 
-These additional references should also help you:
+Security
+- Authentication and authorization are handled using Spring Security
+- Access to backend endpoints is restricted based on user roles
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+Author
+Ibrahim Rania
+
 
