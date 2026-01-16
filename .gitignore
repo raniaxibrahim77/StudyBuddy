@@ -34,3 +34,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Angular / Node ###
+frontend/node_modules/
+frontend/dist/
+
+# Uploads
+uploads/
