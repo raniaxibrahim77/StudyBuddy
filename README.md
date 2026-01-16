@@ -1,4 +1,4 @@
-kUVTBuddy
+UVTBuddy
 
 UVTBuddy is a full-stack integration application designed for university students.
 It centralizes essential UVT-related information and academic events, while also helping students connect and collaborate through study posts and study sessions.
