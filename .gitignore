@@ -42,3 +42,4 @@ frontend/dist/
 # Uploads
 uploads/
 frontend/node_modules/
+.DS_Store
