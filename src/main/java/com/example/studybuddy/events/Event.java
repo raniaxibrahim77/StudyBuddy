@@ -1,4 +1,4 @@
 package com.example.studybuddy.events;
 
-public class Events {
+public class Event {
 }
