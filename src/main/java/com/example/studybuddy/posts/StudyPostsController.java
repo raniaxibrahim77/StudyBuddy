@@ -148,7 +148,6 @@ public class StudyPostsController {
             if (req.tags() != null) p.setTags(req.tags());
 
             var saved = posts.save(p);
-            fileStorage.saveToFile();
             return ResponseEntity.ok(saved);
         }).orElseThrow(() -> new PostNotFound(id));
     }
@@ -166,7 +165,6 @@ public class StudyPostsController {
         }
 
         posts.deleteById(id);
-        fileStorage.saveToFile();
         return ResponseEntity.noContent().build();
     }
 
@@ -195,7 +193,6 @@ public class StudyPostsController {
         }
 
         StudyPosts saved = posts.save(p);
-        fileStorage.saveToFile();
         return ResponseEntity.ok(saved);
     }
 
@@ -210,6 +207,5 @@ public class StudyPostsController {
         return auth != null && auth.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
-
 
 }

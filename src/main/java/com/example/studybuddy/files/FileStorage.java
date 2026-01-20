@@ -54,6 +54,11 @@ public class FileStorage {
     }
 
     public void importPostsFromFile() {
+        if (posts.count() > 0) {
+            System.out.println("Posts already exist in DB. Skipping import.");
+            return;
+        }
+
         try {
             Files.createDirectories(filePath.getParent());
 
