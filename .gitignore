@@ -41,3 +41,4 @@ frontend/dist/
 
 # Uploads
 uploads/
+frontend/node_modules/
